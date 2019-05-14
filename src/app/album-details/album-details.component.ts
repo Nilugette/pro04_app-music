@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 
 // typeScript structure de type
@@ -33,14 +34,14 @@ export class AlbumDetailsComponent implements OnInit, OnChanges {
 
   songs: string[]; // array de string
   isOpen: boolean = false;
-  isDisabled: boolean = false;
+  isActive: boolean = true;
 
   // lifeCycle 
   constructor(private aS: AlbumService) {
     // console.log('constructor AlbumDetailsComponent 1');
-    this.aS.buttonPlay.subscribe(status => {
-      this.isDisabled = status;
-      
+
+    this.aS.buttonPlay.subscribe(state => {
+      this.isActive = state;
     })
   }
 
@@ -54,9 +55,10 @@ export class AlbumDetailsComponent implements OnInit, OnChanges {
 
     // on vérifie que c'est != null
     if (this.album) {
-      const albumList = this.aS.getAlbumList(this.album.id);
+      this.aS.getAlbumList(this.album.id).subscribe(
+        list => this.songs = (list) ? list.list : []
+      );
 
-      if (albumList) this.songs = albumList.list;
       this.toggle();
     }
   }
@@ -65,9 +67,12 @@ export class AlbumDetailsComponent implements OnInit, OnChanges {
     this.onPlay.emit(album); // émettre un album vers le parent
   }
 
+  stop(album: Album) {
+  
+  }
+
   toggle() {
     this.isOpen = false;
-
     const animate = setInterval(() => {
       this.isOpen = !this.isOpen;
       clearInterval(animate);

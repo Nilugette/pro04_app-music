@@ -13,7 +13,12 @@ export class GuardService implements CanActivate {
     canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): any | boolean {
-      return false;
-    }
+      if (this.aS.authState === true) return true;
+
+      this.router.navigate(['/login'], {
+      queryParams: { messageError: 'Error authentification' }}   
+      )
   }
+
   
+}

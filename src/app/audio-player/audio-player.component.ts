@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumService } from '../album.service';
-import { Album } from '../albums';
+//import { Album } from '../albums';
 
 // import { interval } from 'rxjs'; // Observable
 // import { take, map, mergeMap } from 'rxjs/operators'; // opérateurs

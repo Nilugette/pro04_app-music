@@ -8,15 +8,15 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   // état de la connexion
-  private authState: boolean = false;
+  private _authState: boolean = false;
 
   constructor(private router: Router) {
     // Observable il teste si l'utilisateur est connecté
     firebase.auth().onAuthStateChanged( (user) => {
       if (user) {
-        this.authState = true;
+        this._authState = true;
       } else {
-        this.authState = null;
+        this._authState = false;
       }
     });
   }
@@ -26,12 +26,18 @@ export class AuthService {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
 
-  authenticated() {
-
+  get authState(): boolean {
+        return this._authState;
+    
+        
   }
 
-  currentUserObservable() {
-
+  logout() {
+    firebase.auth().signOut().then(
+      () => this.router.navigate(['/albums'], {
+        queryParams: { messageError: 'Success logout' }} )
+    );
   }
+ 
   
 }

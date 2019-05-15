@@ -22,6 +22,7 @@ export class AppComponent {
 
         return `${hours} h ${minutes - hours * 60} min ${number - minutes * 60} s`
       })
+      
     );
 
     counter.subscribe(

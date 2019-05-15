@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let album of albums">
+      <tr *ngFor="let album of albums | async">
         <th scope="row">{{ album.id }}</th>
         <td>TODO</td>
         <td>{{ album.name }}</td>

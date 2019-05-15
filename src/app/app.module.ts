@@ -15,10 +15,10 @@ import { SearchComponent } from './search/search.component';
 import { LoginComponent } from './login/login.component';
 import { AlbumDescriptionComponent } from './album-description/album-description.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PaginateComponent } from './paginate/paginate.component';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdminModule } from './admin/admin.module';
+import { ShareModule } from './share/share.module';
 
 
 @NgModule({
@@ -30,7 +30,6 @@ import { AdminModule } from './admin/admin.module';
     LoginComponent,
     AlbumDescriptionComponent,
     PageNotFoundComponent,
-    PaginateComponent,
     AudioPlayerComponent,
     DashboardComponent
   ],
@@ -40,7 +39,8 @@ import { AdminModule } from './admin/admin.module';
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AdminModule
+    AdminModule,
+    ShareModule
     
   ],
   providers: [],

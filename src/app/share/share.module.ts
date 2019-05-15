@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PaginateComponent } from '../paginate/paginate.component';
+
 
 @NgModule({
-  declarations: [],
+  declarations: [PaginateComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports : [PaginateComponent]
 })
 export class ShareModule { }

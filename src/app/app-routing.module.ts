@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AlbumsComponent } from './albums/albums.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+//import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { AlbumDescriptionComponent } from './album-description/album-description.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GuardService } from './guard-service.service';
+import { AlbumComponent } from './admin/album/album.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
   {
     path : 'dashboard', 
     canActivate: [GuardService],
-    component : DashboardComponent
+    component : AlbumComponent
   },
   {
     path : '**',

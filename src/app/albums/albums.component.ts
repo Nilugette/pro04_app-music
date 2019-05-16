@@ -26,7 +26,7 @@ export class AlbumsComponent implements OnInit {
 
   ngOnInit() {
     // vous pouvez passer en paramètre une fonction flèchée pour sort définie dans le service
-    this.count = this.aS.count();
+    //this.count = this.aS.count();
     this.aS.paginate(0, environment.perPage).subscribe(
       albums => this.albums = albums
     );

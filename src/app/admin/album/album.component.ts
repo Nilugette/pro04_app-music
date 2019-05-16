@@ -13,11 +13,14 @@ import { environment } from 'src/environments/environment';
 export class AlbumComponent implements OnInit {
 
   albums: Observable<Album[]>
+  changePerpage: number;
 
-  constructor(private aS: AlbumService) { }
+  constructor(private aS: AlbumService) {
+    this.changePerpage = environment.perPageAdmin;
+   }
 
-  ngOnInit() {
-      this.albums = this.aS.paginate(0, environment.perPage);
+   ngOnInit() {
+    this.albums = this.aS.paginate(0, this.changePerpage);
   }
 
   paginateParent($event: { start: number, end: number }) {

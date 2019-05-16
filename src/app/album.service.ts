@@ -61,8 +61,17 @@ export class AlbumService {
     return this.http.get<List>(`${this.albumListsUrl}/${id}/.json`, options);
   }
 
-  count(): number {
-    return this._albums == null ? 0 : this._albums.length;
+  // count(): number {
+  //   return this._albums == null ? 0 : this._albums.length;
+  // }
+
+  // Observable 
+  count(): Observable<number> {
+
+    return this.http.get<number>(`${this.albumsUrl}/.json`, httpOptions).pipe(
+      map(albums => _.values(albums)),
+      map(albums => albums.length)
+    )
   }
 
   switchOn(album: Album, options = httpOptions): Observable<Album> {

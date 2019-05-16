@@ -35,10 +35,10 @@ import { ShareModule } from './share/share.module';
   ],
   imports: [
     BrowserModule,
+    AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AdminModule,
     ShareModule
     
   ],

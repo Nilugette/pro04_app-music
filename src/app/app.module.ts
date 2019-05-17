@@ -21,6 +21,7 @@ import { AdminModule } from './admin/admin.module';
 import { ShareModule } from './share/share.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +33,7 @@ import { ShareModule } from './share/share.module';
     PageNotFoundComponent,
     AudioPlayerComponent,
     DashboardComponent
+
   ],
   imports: [
     BrowserModule,

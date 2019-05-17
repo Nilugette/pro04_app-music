@@ -1,10 +1,10 @@
-
 import { Component, OnInit } from '@angular/core';
 import { AlbumService } from 'src/app/album.service';
-import { Album } from 'src/app/albums';
+import { Album, Position } from 'src/app/albums';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-album',
@@ -16,16 +16,27 @@ export class AlbumComponent implements OnInit {
   albums: Observable<Album[]>;
   changePerpage: number;
   message: string;
+  showModal: boolean = false;
+  albumId: string | number;
 
-  constructor(private aS: AlbumService, private route: ActivatedRoute ) {
+  constructor(
+    private aS: AlbumService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     // nombre d'albums par page dans l'administration
     // en fonction des variables d'environement
     this.changePerpage = environment.perPageAdmin;
-    this.message = this.route.snapshot.paramMap.get('message');
   }
 
   ngOnInit() {
     this.albums = this.aS.paginate(0, this.changePerpage);
+
+    this.route.queryParamMap
+      .pipe(
+        map(params => params.get('message') || null)
+      )
+      .subscribe(message => this.message = message);
   }
 
   paginateParent($event: { start: number, end: number }) {
@@ -33,4 +44,9 @@ export class AlbumComponent implements OnInit {
 
     this.albums = this.aS.paginate(start, end);
   }
+
+  destroy(album) {
+    this.router.navigate(['/admin/delete/' + album.id]);
+  }
+
 }

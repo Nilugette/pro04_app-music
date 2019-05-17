@@ -19,9 +19,6 @@ const httpOptions = {
 })
 export class AlbumService {
 
-  private _albums: Album[] = ALBUMS; // _ convention private et protected
-  private _albumList: List[] = ALBUM_LISTS;
-
   private albumsUrl = 'https://app-music-c4581.firebaseio.com/albums';
   private albumListsUrl = 'https://app-music-c4581.firebaseio.com/albumLists';
 
@@ -56,14 +53,10 @@ export class AlbumService {
     return this.http.get<Album>(`${this.albumsUrl}/${id}/.json`, options);
   }
 
-  getAlbumList(id: string, options = httpOptions): Observable<List> { 
+  getAlbumList(id: string, options = httpOptions): Observable<List> {
 
     return this.http.get<List>(`${this.albumListsUrl}/${id}/.json`, options);
   }
-
-  // count(): number {
-  //   return this._albums == null ? 0 : this._albums.length;
-  // }
 
   // Observable 
   count(): Observable<number> {
@@ -77,10 +70,9 @@ export class AlbumService {
   switchOn(album: Album, options = httpOptions): Observable<Album> {
     this.buttonPlay.next(false);
     album.status = "on";
-    
     // On peut faire une copie de l'objet album mais ce n'est pas fondamental
     // méthode { ...album } fait une copie
-    const Album = { ...album }; 
+    const Album = { ...album };
 
     return this.http.put<Album>(`${this.albumsUrl}/${album.id}/.json`, Album, options);
   }
@@ -88,7 +80,6 @@ export class AlbumService {
   switchOff(album: Album, options = httpOptions): Observable<Album> {
     this.buttonPlay.next(true);
     album.status = 'off';
-
     // On peut faire une copie de l'objet album mais ce n'est pas fondamental
     // méthode { ...album } fait une copie
     const Album = { ...album };
@@ -109,7 +100,6 @@ export class AlbumService {
     return this.http.get<Album[]>(this.albumsUrl + '/.json', httpOptions).pipe(
 
       map(albums => _.values(albums)),
-
       map(albums => {
         let Albums = [];
         if (word.length > 3) {
@@ -121,6 +111,16 @@ export class AlbumService {
         return Albums;
       })
     );
+  }
+
+  addAlbum(album: Album): Observable<any> {
+
+    return this.http.post<any>(`${this.albumsUrl}/.json`, album);
+  }
+
+  updateAlbum(ref: string, album: Album): Observable<any> {
+
+    return this.http.put<any>(`${this.albumsUrl}/${ref}/.json`, album);
   }
 
 }
